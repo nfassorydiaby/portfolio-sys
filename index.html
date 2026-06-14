@@ -173,11 +173,59 @@
     .hidden { display: none; }
 
     /* RESPONSIVE */
-    @media (max-width: 600px) {
-      .hero { grid-template-columns: 1fr; }
+    @media (max-width: 640px) {
+      body { padding: 0; }
+
+      .portfolio {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 1.5rem 1.25rem 1.25rem;
+        gap: 1.25rem;
+      }
+
+      .hero-name { font-size: 22px; }
+      .hero-bio { font-size: 13px; }
+
+      .hero-right { padding: 1rem; }
+      .stat-card .val { font-size: 18px; }
+
+      .tabs { padding: 0 1.25rem; overflow-x: auto; }
+      .tab-btn { padding: 0.65rem 0.9rem; font-size: 13px; white-space: nowrap; }
+
+      .content { padding: 1.25rem 1.25rem 2rem; }
+
+      .tl-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .tl-date { text-align: left; font-size: 11px; color: var(--muted); }
+      .tl-title { font-size: 13px; }
+      .tl-desc { font-size: 12px; }
+
       .skills-grid { grid-template-columns: 1fr; }
-      .tl-item { grid-template-columns: 1fr; }
-      .tl-date { text-align: left; }
+
+      .formation-card { grid-template-columns: 1fr; gap: 0.5rem; }
+      .formation-icon { width: 34px; height: 34px; }
+      .formation-degree { font-size: 13px; }
+      .formation-desc { font-size: 12px; }
+
+      .interests { gap: 6px; }
+      .interest-chip { font-size: 12px; padding: 5px 10px; }
+    }
+
+    @media (min-width: 641px) and (max-width: 860px) {
+      body { padding: 1rem; }
+
+      .hero { padding: 2rem 1.5rem 1.5rem; gap: 1.25rem; }
+      .hero-name { font-size: 24px; }
+
+      .tabs { padding: 0 1.5rem; }
+      .content { padding: 1.5rem 1.5rem 2rem; }
+
+      .tl-item { grid-template-columns: 90px 1fr; }
     }
   </style>
 </head>
