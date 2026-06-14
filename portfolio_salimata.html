@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salimata Yacine Sembene — Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --rose: #D4537E;
+      --rose-light: #FBEAF0;
+      --rose-mid: #ED93B1;
+      --rose-dark: #72243E;
+      --navy: #185FA5;
+      --navy-light: #E6F1FB;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --bg: #ffffff;
+      --bg2: #f8f8f7;
+      --border: rgba(0,0,0,0.12);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: #f3f3f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .portfolio {
+      background: var(--bg);
+      border-radius: 16px;
+      border: 0.5px solid var(--border);
+      width: 100%;
+      max-width: 800px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .hero-left { display: flex; flex-direction: column; gap: 1rem; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--rose-light); color: var(--rose-dark);
+      font-size: 12px; padding: 4px 12px; border-radius: 20px; width: fit-content;
+    }
+    .hero-name { font-size: 28px; font-weight: 600; line-height: 1.2; }
+    .hero-name span { color: var(--rose); }
+    .hero-bio { font-size: 14px; line-height: 1.7; color: var(--muted); }
+    .hero-contacts { display: flex; flex-direction: column; gap: 6px; }
+    .contact-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+    .contact-item i { font-size: 14px; color: var(--rose); width: 16px; }
+
+    .hero-right {
+      background: var(--rose-light);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat-card {
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      border: 0.5px solid var(--border);
+      padding: 0.75rem 1rem;
+    }
+    .stat-card .val { font-size: 22px; font-weight: 600; color: var(--rose); }
+    .stat-card .lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .lang-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .lang-pill {
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--muted);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .lang-pill i { color: var(--rose); font-size: 13px; }
+
+    /* TABS */
+    .tabs {
+      display: flex; gap: 0;
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+    }
+    .tab-btn {
+      padding: 0.75rem 1.25rem; font-size: 14px; cursor: pointer;
+      background: none; border: none; color: var(--muted);
+      border-bottom: 2px solid transparent; margin-bottom: -0.5px;
+      font-family: var(--font); transition: color .2s;
+    }
+    .tab-btn:hover { color: var(--rose); }
+    .tab-btn.active { color: var(--rose); border-bottom-color: var(--rose); font-weight: 500; }
+
+    /* CONTENT */
+    .content { padding: 1.5rem 2rem 2.5rem; }
+
+    .section-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--muted); margin-bottom: 1.25rem;
+    }
+
+    /* TIMELINE */
+    .tl-item { display: grid; grid-template-columns: 110px 1fr; gap: 1rem; padding-bottom: 1.5rem; }
+    .tl-date { font-size: 12px; color: var(--muted); padding-top: 2px; line-height: 1.5; text-align: right; }
+    .tl-body { border-left: 1.5px solid var(--rose-mid); padding-left: 1rem; position: relative; }
+    .tl-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--rose); position: absolute; left: -4.75px; top: 4px;
+    }
+    .tl-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .tl-company { font-size: 12px; color: var(--rose); margin-bottom: 6px; }
+    .tl-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tl-tag {
+      font-size: 11px; padding: 2px 8px; border-radius: 4px;
+      background: var(--bg2); border: 0.5px solid var(--border); color: var(--muted);
+    }
+
+    /* FORMATION */
+    .formation-list { display: flex; flex-direction: column; gap: 1rem; }
+    .formation-card {
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1rem 1.25rem;
+      display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start;
+    }
+    .formation-icon {
+      width: 40px; height: 40px; border-radius: var(--radius-md);
+      background: var(--rose-light); display: flex; align-items: center; justify-content: center;
+    }
+    .formation-icon i { font-size: 18px; color: var(--rose); }
+    .formation-degree { font-size: 14px; font-weight: 600; }
+    .formation-school { font-size: 13px; color: var(--rose); margin: 2px 0; }
+    .formation-period { font-size: 12px; color: var(--muted); }
+    .formation-desc { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .skill-group { background: var(--bg2); border-radius: var(--radius-md); padding: 1rem 1.25rem; }
+    .skill-group-title {
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      margin-bottom: 0.75rem; display: flex; align-items: center; gap: 6px;
+    }
+    .skill-group-title i { color: var(--rose); font-size: 14px; }
+    .skill-list { display: flex; flex-direction: column; gap: 10px; }
+    .skill-item { display: flex; flex-direction: column; gap: 4px; }
+    .skill-name { font-size: 13px; }
+    .skill-bar { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .skill-fill { height: 100%; background: var(--rose); border-radius: 2px; }
+
+    .interests { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.25rem; }
+    .interest-chip {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--rose-light); color: var(--rose-dark);
+      border-radius: 20px; padding: 6px 14px; font-size: 13px;
+    }
+    .interest-chip i { font-size: 13px; }
+
+    .hidden { display: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .tl-item { grid-template-columns: 1fr; }
+      .tl-date { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+<div class="portfolio">
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="tag"><i class="fa-solid fa-magnifying-glass"></i> Recherche alternance</div>
+      <div class="hero-name">Salimata Yacine<br><span>Sembene</span></div>
+      <div class="hero-bio">Future étudiante en Master AI Marketing &amp; Business à EBS Paris. 5 ans d'expérience commerciale en GRC et une solide pratique du content management. Orientée résultats, créative et centrée sur l'expérience client.</div>
+      <div class="hero-contacts">
+        <div class="contact-item"><i class="fa-solid fa-envelope"></i> sembene84@gmail.com</div>
+        <div class="contact-item"><i class="fa-solid fa-phone"></i> +212 665 470 557</div>
+        <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Casablanca / Paris</div>
+        <div class="contact-item"><i class="fa-brands fa-linkedin"></i> linkedin.com/in/salimata-yacine-sembene</div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-row">
+        <div class="stat-card"><div class="val">5 ans</div><div class="lbl">Expérience commerciale</div></div>
+        <div class="stat-card"><div class="val">3</div><div class="lbl">Langues maîtrisées</div></div>
+        <div class="stat-card"><div class="val">B2B</div><div class="lbl">Contenu LinkedIn</div></div>
+        <div class="stat-card"><div class="val">CRM</div><div class="lbl">GRC &amp; fidélisation</div></div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-pill"><i class="fa-solid fa-language"></i> Français</div>
+        <div class="lang-pill"><i class="fa-solid fa-language"></i> Anglais</div>
+        <div class="lang-pill"><i class="fa-solid fa-language"></i> Espagnol</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('experience', this)">Expérience</button>
+    <button class="tab-btn" onclick="showTab('formation', this)">Formation</button>
+    <button class="tab-btn" onclick="showTab('skills', this)">Compétences</button>
+  </div>
+
+  <div class="content">
+
+    <!-- EXPERIENCE -->
+    <div id="tab-experience">
+      <div class="section-title">Parcours professionnel</div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-date">Sept. 2025<br>Juil. 2026</div>
+          <div class="tl-body">
+            <div class="tl-dot"></div>
+            <div class="tl-title">Assistante Content Manager</div>
+            <div class="tl-company">Intelcia Tech · Casablanca</div>
+            <div class="tl-desc">Benchmarking concurrentiel (Capgemini, Eviden, Accenture), élaboration du planning éditorial, création de contenus LinkedIn et conduite d'interviews d'ingénieurs pour valoriser l'expertise interne.</div>
+            <div class="tl-tags">
+              <span class="tl-tag">LinkedIn</span>
+              <span class="tl-tag">Planning éditorial</span>
+              <span class="tl-tag">Benchmarking</span>
+              <span class="tl-tag">Contenu B2B</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Fév. 2020<br>Oct. 2024</div>
+          <div class="tl-body">
+            <div class="tl-dot"></div>
+            <div class="tl-title">Conseillère Commerciale</div>
+            <div class="tl-company">Konecta · Bouygues Telecom · Casablanca</div>
+            <div class="tl-desc">GRC : gestion clientèle, vente d'offres box et mobiles, fidélisation et prévention du churn. Recouvrement et suivi des impayés. Coordination du raccordement fibre optique.</div>
+            <div class="tl-tags">
+              <span class="tl-tag">GRC</span>
+              <span class="tl-tag">Fidélisation</span>
+              <span class="tl-tag">Vente</span>
+              <span class="tl-tag">Recouvrement</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">Janv. 2019<br>Janv. 2020</div>
+          <div class="tl-body">
+            <div class="tl-dot"></div>
+            <div class="tl-title">Conseillère Commerciale</div>
+            <div class="tl-company">Intelcia · SFR · Casablanca</div>
+            <div class="tl-desc">Activation services box et mobiles, explications de factures, ventes bouquets TV. Membre fondatrice de la première équipe pilote SFR FTTX.</div>
+            <div class="tl-tags">
+              <span class="tl-tag">SFR FTTX</span>
+              <span class="tl-tag">Activation</span>
+              <span class="tl-tag">Relation client</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FORMATION -->
+    <div id="tab-formation" class="hidden">
+      <div class="section-title">Parcours académique</div>
+      <div class="formation-list">
+        <div class="formation-card">
+          <div class="formation-icon"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <div class="formation-degree">Master AI Marketing &amp; Business</div>
+            <div class="formation-school">European Business School (EBS) · Paris</div>
+            <div class="formation-period">Sept. 2026 → Juil. 2028</div>
+            <div class="formation-desc">IA appliquée au marketing : traitement des données, automatisation des campagnes, stratégie digitale augmentée.</div>
+          </div>
+        </div>
+        <div class="formation-card">
+          <div class="formation-icon"><i class="fa-solid fa-laptop"></i></div>
+          <div>
+            <div class="formation-degree">Licence 3 Marketing Digital &amp; Communication</div>
+            <div class="formation-school">ESSEM Business School · Casablanca</div>
+            <div class="formation-period">Sept. 2023 → Juil. 2026</div>
+            <div class="formation-desc">Stratégie marketing globale, analyse de données, communication commerciale, CRM, e-commerce.</div>
+          </div>
+        </div>
+        <div class="formation-card">
+          <div class="formation-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div>
+            <div class="formation-degree">Baccalauréat</div>
+            <div class="formation-school">Samibou · Dakar</div>
+            <div class="formation-period">Oct. 2016 → Août 2017</div>
+            <div class="formation-desc">Série Littérature &amp; Sciences de la vie et de la terre.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div id="tab-skills" class="hidden">
+      <div class="section-title">Outils &amp; savoir-faire</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title"><i class="fa-solid fa-wrench"></i> Outils digitaux</div>
+          <div class="skill-list">
+            <div class="skill-item"><div class="skill-name">Canva</div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">Hootsuite</div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">Adobe Suite</div><div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">Microsoft Office</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title"><i class="fa-solid fa-chart-bar"></i> Marketing &amp; business</div>
+          <div class="skill-list">
+            <div class="skill-item"><div class="skill-name">Marketing digital</div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">CRM / GRC</div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">Communication commerciale</div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">Création de contenu</div><div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="section-title" style="margin-top:1.5rem">Centres d'intérêt</div>
+      <div class="interests">
+        <div class="interest-chip"><i class="fa-solid fa-fingerprint"></i> Branding</div>
+        <div class="interest-chip"><i class="fa-solid fa-pen-nib"></i> Création de contenu digital</div>
+        <div class="interest-chip"><i class="fa-solid fa-arrow-trend-up"></i> Veille social media</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showTab(name, btn) {
+  ['experience','formation','skills'].forEach(function(t) {
+    document.getElementById('tab-'+t).classList.add('hidden');
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  document.getElementById('tab-'+name).classList.remove('hidden');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
